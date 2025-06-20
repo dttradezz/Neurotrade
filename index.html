@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEUROTRADE | Advanced Trading Psychology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a66ff;
+            --primary-dark: #0052d9;
+            --primary-light: rgba(10, 102, 255, 0.1);
+            --secondary: #00a8ff;
+            --danger: #ff4757;
+            --danger-light: rgba(255, 71, 87, 0.1);
+            --success: #00c9a7;
+            --success-light: rgba(0, 201, 167, 0.1);
+            --warning: #ffb142;
+            --warning-light: rgba(255, 177, 66, 0.1);
+            --dark: #1a2b4a;
+            --darker: #0e1a2e;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-500: #64748b;
+            --gray-700: #334155;
+            --bg-gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --bg-gradient-danger: linear-gradient(135deg, var(--danger) 0%, #ff6b81 100%);
+            --bg-gradient-success: linear-gradient(135deg, var(--success) 0%, #00e0ff 100%);
+            --bg-gradient-warning: linear-gradient(135deg, var(--warning) 0%, #ffcc8a 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+            --border-radius: 16px;
+            --border-radius-sm: 10px;
+            --border: 1px solid rgba(0, 0, 0, 0.05);
+            --border-light: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f9ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* App Container */
+        .app-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background-color: var(--lighter);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.03);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .app-header {
+            background-color: var(--lighter);
+            padding: 1.5rem 2.5rem;
+            border-bottom: var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(10, 102, 255, 0.2);
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2.5rem;
+            flex: 1;
+            position: relative;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-title h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            border: var(--border);
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--bg-gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.75rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Emotion Scanner */
+        .scanner-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .form-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-label i {
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .form-control {
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: var(--lighter);
+            font-weight: 500;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10, 102, 255, 0.1);
+        }
+
+        /* Range Slider */
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .range-slider {
+            flex-grow: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            background: var(--gray-200);
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .range-slider:hover {
+            background: var(--gray-300);
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(10, 102, 255, 0.3);
+            transition: all 0.3s;
+            border: 3px solid white;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(10, 102, 255, 0.4);
+        }
+
+        .range-value {
+            min-width: 36px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-feature-settings: "tnum";
+            background: var(--primary-light);
+            padding: 0.5rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Results */
+        .scanner-result {
+            margin-top: 2.5rem;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: var(--border-light);
+        }
+
+        .result-score {
+            font-size: 4rem;
+            font-weight: 900;
+            font-feature-settings: "tnum";
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .result-status {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .status-danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .status-warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .status-success {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .detail-card {
+            background-color: var(--gray-100);
+            border-radius: var(--border-radius-sm);
+            padding: 1.75rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: var(--border-light);
+        }
+
+        .detail-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .detail-title {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            font-feature-settings: "tnum";
+            letter-spacing: -1px;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin-top: 1.5rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            margin-top: 3rem;
+        }
+
+        .recommendations h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .recommendations h3 i {
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recommendation-list {
+            list-style-type: none;
+            background-color: var(--gray-100);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            border: var(--border-light);
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.5rem;
+            border-bottom: var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .recommendation-item:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+
+        .recommendation-icon {
+            color: var(--success);
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .recommendation-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .recommendation-priority {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .priority-high {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .priority-medium {
+            background-color: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .priority-low {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        /* Expert Tips Section */
+        .expert-tips {
+            margin-top: 3rem;
+        }
+
+        .expert-tips h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expert-tips h3 i {
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            border: var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tip-source {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .tip-meta {
+            flex: 1;
+        }
+
+        .tip-author {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        .tip-role {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        .tip-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.1rem 1.75rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+            letter-spacing: -0.2px;
+        }
+
+        .btn-primary {
+            background: var(--bg-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(10, 102, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(10, 102, 255, 0.25);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-sm);
+            padding: 1.75rem;
+            text-align: center;
+            border: var(--border-light);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--bg-gradient);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-feature-settings: "tnum";
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Trading Journal */
+        .journal-container {
+            margin-top: 3rem;
+        }
+
+        .journal-entries {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .journal-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            border: var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .journal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .journal-date {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .journal-emotion {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .emotion-positive {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .emotion-neutral {
+            background-color: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .emotion-negative {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .journal-score {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .journal-note {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .scanner-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .journal-entries {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .app-header {
+                padding: 1.25rem;
+            }
+            
+            .main-content {
+                padding: 1.75rem;
+            }
+            
+            .result-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card {
+                padding: 1.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .journal-entries {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="logo-text">NEUROTRADE</div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="new-analysis-btn">
+                    <i class="fas fa-plus"></i>
+                    <span>New Analysis</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-header">
+                <div class="page-title">
+                    <h1>Trading Psychology Dashboard</h1>
+                </div>
+            </div>
+
+            <!-- Emotion Scanner -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-brain"></i>
+                        <span>Emotion Scanner</span>
+                    </h2>
+                </div>
+                
+                <form class="scanner-form" id="scanner-form">
+                    <div class="form-group">
+                        <label for="current-mood" class="form-label">
+                            <i class="fas fa-smile"></i>
+                            <span>PRIMARY EMOTION</span>
+                        </label>
+                        <select id="current-mood" class="form-control" required>
+                            <option value="">Select dominant emotion</option>
+                            <option value="confident">Confident</option>
+                            <option value="anxious">Anxious</option>
+                            <option value="greedy">Greedy</option>
+                            <option value="fearful">Fearful</option>
+                            <option value="frustrated">Frustrated</option>
+                            <option value="impatient">Impatient</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="euphoric">Euphoric</option>
+                            <option value="indecisive">Indecisive</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="energy-level" class="form-label">
+                            <i class="fas fa-bolt"></i>
+                            <span>ENERGY LEVEL</span>
+                        </label>
+                        <div class="range-container">
+                            <input type="range" min="1" max="10" value="5" class="range-slider" id="energy-level">
+                            <span class="range-value">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recent-performance" class="form-label">
+                            <i class="fas fa-trophy"></i>
+                            <span>RECENT PERFORMANCE</span>
+                        </label>
+                        <select id="recent-performance" class="form-control" required>
+                            <option value="">Select last 5 trades</option>
+                            <option value="5wins">5 Winners</option>
+                            <option value="4wins">4 Winners</option>
+                            <option value="3wins">3 Winners</option>
+                            <option value="mixed">Mixed Results</option>
+                            <option value="3losses">3 Losers</option>
+                            <option value="4losses">4 Losers</option>
+                            <option value="5losses">5 Losers</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="market-condition" class="form-label">
+                            <i class="fas fa-chart-line"></i>
+                            <span>MARKET CONDITION</span>
+                        </label>
+                        <select id="market-condition" class="form-control" required>
+                            <option value="">Select current market state</option>
+                            <option value="volatile">Highly Volatile</option>
+                            <option value="trending">Strong Trend</option>
+                            <option value="ranging">Sideways</option>
+                            <option value="news">News-Driven</option>
+                            <option value="breakout">Breakout</option>
+                            <option value="reversal">Reversal</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trading-urge" class="form-label">
+                            <i class="fas fa-fire"></i>
+                            <span>TRADING URGE</span>
+                        </label>
+                        <div class="range-container">
+                            <input type="range" min="1" max="10" value="5" class="range-slider" id="trading-urge">
+                            <span class="range-value">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="risk-tolerance" class="form-label">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>RISK TOLERANCE</span>
+                        </label>
+                        <div class="range-container">
+                            <input type="range" min="1" max="10" value="5" class="range-slider" id="risk-tolerance">
+                            <span class="range-value">5</span>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="btn-group" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button class="btn btn-primary" id="analyze-btn" style="flex: 1;">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Run Analysis</span>
+                    </button>
+                    <button class="btn btn-secondary" id="reset-btn" style="flex: 0 0 auto;">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+                
+                <div class="scanner-result" id="scanner-result">
+                    <div class="result-header">
+                        <div class="result-score" id="result-score">-</div>
+                        <div class="result-status" id="result-status">-</div>
+                    </div>
+                    
+                    <div class="result-details">
+                        <div class="detail-card">
+                            <div class="detail-title">Emotional Stability</div>
+                            <div class="detail-value" id="stability-value">-</div>
+                            <div class="progress-container">
+                                <div class="progress-item">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="stability-bar" style="width: 0%; background: var(--primary);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-title">Risk Profile</div>
+                            <div class="detail-value" id="risk-value">-</div>
+                            <div class="progress-container">
+                                <div class="progress-item">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="risk-bar" style="width: 0%; background: var(--primary);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-title">Decision Quality</div>
+                            <div class="detail-value" id="decision-value">-</div>
+                            <div class="progress-container">
+                                <div class="progress-item">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="decision-bar" style="width: 0%; background: var(--primary);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h3>
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Professional Recommendations</span>
+                        </h3>
+                        <ul class="recommendation-list" id="recommendation-list">
+                            <!-- Will be populated by JS -->
+                        </ul>
+                    </div>
+                    
+                    <div class="expert-tips">
+                        <h3>
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Expert Trading Psychology Tips</span>
+                        </h3>
+                        <div class="tips-grid" id="expert-tips-grid">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">82%</div>
+                    <div class="stat-label">Discipline Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7.1</div>
+                    <div class="stat-label">Avg. Emotion</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">High-Risk Days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">+24%</div>
+                    <div class="stat-label">Account Growth</div>
+                </div>
+            </div>
+            
+            <!-- Trading Journal -->
+            <div class="journal-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-book"></i>
+                            <span>Trading Psychology Journal</span>
+                        </h2>
+                    </div>
+                    
+                    <div class="journal-entries">
+                        <div class="journal-card">
+                            <div class="journal-date">Today, 10:45 AM</div>
+                            <div class="journal-emotion emotion-positive">Confident</div>
+                            <div class="journal-score">78</div>
+                            <div class="journal-note">Felt in control during morning session. Stuck to trading plan and took profits at predetermined levels.</div>
+                        </div>
+                        <div class="journal-card">
+                            <div class="journal-date">Yesterday, 2:30 PM</div>
+                            <div class="journal-emotion emotion-neutral">Neutral</div>
+                            <div class="journal-score">65</div>
+                            <div class="journal-note">Market was choppy. Maintained discipline but felt slightly impatient waiting for setups.</div>
+                        </div>
+                        <div class="journal-card">
+                            <div class="journal-date">2 days ago, 11:15 AM</div>
+                            <div class="journal-emotion emotion-negative">Frustrated</div>
+                            <div class="journal-score">42</div>
+                            <div class="journal-note">Missed early entry and then chased the trade. Took a loss and stepped away to reset.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Range slider value display
+            const rangeSliders = document.querySelectorAll('.range-slider');
+            rangeSliders.forEach(slider => {
+                const valueDisplay = slider.nextElementSibling;
+                
+                // Set initial value
+                valueDisplay.textContent = slider.value;
+                
+                // Update on change
+                slider.addEventListener('input', function() {
+                    valueDisplay.textContent = this.value;
+                });
+            });
+            
+            // Expert Tips Data with images
+            const expertTips = [
+                {
+                    author: "Mark Douglas",
+                    role: "Trading Psychologist",
+                    content: "The best traders have no ego. You have to swallow your pride and get out of losing positions quickly. The market doesn't care about your opinions or predictions.",
+                    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    author: "Dr. Brett Steenbarger",
+                    role: "Clinical Psychologist",
+                    content: "Successful trading is 10% strategy and 90% self-awareness. Keep a journal of your emotional states and learn to recognize your personal danger zones.",
+                    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    author: "Linda Raschke",
+                    role: "Professional Trader",
+                    content: "When you're in a drawdown, reduce your size. When you're trading well, you can increase size gradually. Never revenge trade after losses.",
+                    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    author: "Van Tharp",
+                    role: "Trading Coach",
+                    content: "Focus on the process, not the money. If you execute your edge consistently, the profits will come. Worrying about P&L creates emotional interference.",
+                    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    author: "Paul Tudor Jones",
+                    role: "Hedge Fund Manager",
+                    content: "The secret to trading success is emotional discipline. If intelligence were the key, there would be a lot more millionaires.",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    author: "Ed Seykota",
+                    role: "Commodities Trader",
+                    content: "Win or lose, everybody gets what they want out of the market. Some people seem to like to lose, so they win by losing money.",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+                }
+            ];
+
+            // Function to get daily rotating tips (2 different tips each day)
+            function getDailyTips() {
+                const dayOfYear = Math.floor((Date.now() - Date.parse(new Date().getFullYear(), 0, 0)) / 86400000);
+                const tip1Index = dayOfYear % expertTips.length;
+                const tip2Index = (dayOfYear + Math.floor(expertTips.length/2)) % expertTips.length;
+                
+                return [expertTips[tip1Index], expertTips[tip2Index]];
+            }
+            
+            // Populate expert tips
+            function populateExpertTips() {
+                const tipsGrid = document.getElementById('expert-tips-grid');
+                tipsGrid.innerHTML = '';
+                
+                const dailyTips = getDailyTips();
+                
+                dailyTips.forEach((tip, index) => {
+                    const tipCard = document.createElement('div');
+                    tipCard.className = 'tip-card';
+                    tipCard.innerHTML = `
+                        <div class="tip-source">
+                            <div class="tip-avatar" style="background-image: url('${tip.image}')"></div>
+                            <div class="tip-meta">
+                                <div class="tip-author">${tip.author}</div>
+                                <div class="tip-role">${tip.role}</div>
+                            </div>
+                        </div>
+                        <div class="tip-content">"${tip.content}"</div>
+                    `;
+                    tipsGrid.appendChild(tipCard);
+                });
+            }
+            
+            // Run initial population
+            populateExpertTips();
+            
+            // Reset form function
+            function resetForm() {
+                document.getElementById('scanner-form').reset();
+                document.querySelectorAll('.range-value').forEach(el => {
+                    el.textContent = '5';
+                });
+                document.getElementById('scanner-result').style.display = 'none';
+            }
+            
+            // Emotion Analysis function
+            function runAnalysis() {
+                const mood = document.getElementById('current-mood').value;
+                const energy = parseInt(document.getElementById('energy-level').value);
+                const performance = document.getElementById('recent-performance').value;
+                const market = document.getElementById('market-condition').value;
+                const urge = parseInt(document.getElementById('trading-urge').value);
+                const risk = parseInt(document.getElementById('risk-tolerance').value);
+                
+                // Validate required fields
+                if (!mood || !performance || !market) {
+                    alert('Please complete all required fields');
+                    return;
+                }
+                
+                // Calculate scores (advanced algorithm)
+                let emotionScore = 50;
+                let stabilityScore = 60;
+                let riskScore = 50;
+                let decisionScore = 55;
+                
+                // Mood adjustments
+                const moodWeights = {
+                    'confident': { emotion: 12, stability: 5, risk: 15, decision: -5 },
+                    'neutral': { emotion: 8, stability: 10, risk: 0, decision: 0 },
+                    'anxious': { emotion: -15, stability: -10, risk: -5, decision: -8 },
+                    'fearful': { emotion: -18, stability: -12, risk: -8, decision: -10 },
+                    'greedy': { emotion: -20, stability: -15, risk: 25, decision: -15 },
+                    'frustrated': { emotion: -22, stability: -18, risk: 15, decision: -20 },
+                    'impatient': { emotion: -15, stability: -10, risk: 10, decision: -12 },
+                    'euphoric': { emotion: -25, stability: -20, risk: 30, decision: -25 },
+                    'indecisive': { emotion: -10, stability: -15, risk: -10, decision: -15 }
+                };
+                
+                if (moodWeights[mood]) {
+                    emotionScore += moodWeights[mood].emotion;
+                    stabilityScore += moodWeights[mood].stability;
+                    riskScore += moodWeights[mood].risk;
+                    decisionScore += moodWeights[mood].decision;
+                }
+                
+                // Energy adjustments
+                if (energy <= 3) {
+                    emotionScore -= 8;
+                    stabilityScore -= 5;
+                    decisionScore -= 5;
+                } else if (energy >= 8) {
+                    emotionScore += 5;
+                    stabilityScore -= 3;
+                    riskScore += 5;
+                }
+                
+                // Performance adjustments
+                const performanceWeights = {
+                    '5wins': { emotion: 20, stability: 5, risk: 25, decision: -15 },
+                    '4wins': { emotion: 15, stability: 3, risk: 20, decision: -10 },
+                    '3wins': { emotion: 8, stability: 0, risk: 10, decision: 0 },
+                    'mixed': { emotion: 0, stability: 0, risk: 0, decision: 0 },
+                    '3losses': { emotion: -12, stability: -8, risk: -5, decision: -5 },
+                    '4losses': { emotion: -20, stability: -15, risk: -10, decision: -8 },
+                    '5losses': { emotion: -25, stability: -20, risk: -15, decision: -10 }
+                };
+                
+                if (performanceWeights[performance]) {
+                    emotionScore += performanceWeights[performance].emotion;
+                    stabilityScore += performanceWeights[performance].stability;
+                    riskScore += performanceWeights[performance].risk;
+                    decisionScore += performanceWeights[performance].decision;
+                }
+                
+                // Market condition adjustments
+                if (market === 'volatile' || market === 'news') {
+                    stabilityScore -= 10;
+                    decisionScore -= 5;
+                } else if (market === 'breakout' || market === 'reversal') {
+                    riskScore += 5;
+                }
+                
+                // Trading urge adjustments
+                if (urge >= 7) {
+                    emotionScore -= (urge - 6) * 3;
+                    stabilityScore -= (urge - 6) * 2;
+                    riskScore += (urge - 6) * 3;
+                }
+                
+                // Risk tolerance adjustments
+                if (risk >= 7) {
+                    riskScore += (risk - 6) * 5;
+                    decisionScore -= (risk - 6) * 2;
+                } else if (risk <= 3) {
+                    decisionScore += (4 - risk) * 2;
+                }
+                
+                // Cap scores between 0-100
+                emotionScore = Math.max(0, Math.min(100, Math.round(emotionScore)));
+                stabilityScore = Math.max(0, Math.min(100, Math.round(stabilityScore)));
+                riskScore = Math.max(0, Math.min(100, Math.round(riskScore)));
+                decisionScore = Math.max(0, Math.min(100, Math.round(decisionScore)));
+                
+                // Display results
+                const resultScore = document.getElementById('result-score');
+                const statusElement = document.getElementById('result-status');
+                
+                resultScore.textContent = emotionScore;
+                
+                if (emotionScore < 30) {
+                    resultScore.style.background = 'var(--bg-gradient-danger)';
+                    statusElement.textContent = 'DANGER ZONE';
+                    statusElement.className = 'result-status status-danger';
+                } else if (emotionScore < 60) {
+                    resultScore.style.background = 'var(--bg-gradient-warning)';
+                    statusElement.textContent = 'CAUTION';
+                    statusElement.className = 'result-status status-warning';
+                } else {
+                    resultScore.style.background = 'var(--bg-gradient-success)';
+                    statusElement.textContent = 'OPTIMAL';
+                    statusElement.className = 'result-status status-success';
+                }
+                
+                // Update detail values and progress bars
+                document.getElementById('stability-value').textContent = stabilityScore;
+                document.getElementById('risk-value').textContent = riskScore;
+                document.getElementById('decision-value').textContent = decisionScore;
+                
+                // Animate progress bars
+                setTimeout(() => {
+                    document.getElementById('stability-bar').style.width = `${stabilityScore}%`;
+                    document.getElementById('risk-bar').style.width = `${riskScore}%`;
+                    document.getElementById('decision-bar').style.width = `${decisionScore}%`;
+                    
+                    // Set progress bar colors
+                    document.getElementById('stability-bar').style.background = 
+                        stabilityScore < 40 ? 'var(--danger)' : 
+                        stabilityScore < 70 ? 'var(--warning)' : 'var(--success)';
+                    
+                    document.getElementById('risk-bar').style.background = 
+                        riskScore > 70 ? 'var(--danger)' : 
+                        riskScore > 40 ? 'var(--warning)' : 'var(--success)';
+                    
+                    document.getElementById('decision-bar').style.background = 
+                        decisionScore < 40 ? 'var(--danger)' : 
+                        decisionScore < 70 ? 'var(--warning)' : 'var(--success)';
+                }, 100);
+                
+                // Generate recommendations
+                const recommendations = [];
+                
+                if (emotionScore < 30) {
+                    recommendations.push({
+                        text: "⚠️ IMMEDIATE TRADING HALT - High emotional risk detected",
+                        priority: "high"
+                    });
+                    recommendations.push({
+                        text: "Mandatory 24-hour trading break - no exceptions",
+                        priority: "high"
+                    });
+                    recommendations.push({
+                        text: "Schedule a session with your trading psychologist",
+                        priority: "high"
+                    });
+                    recommendations.push({
+                        text: "Perform 20-minute mindfulness meditation now",
+                        priority: "medium"
+                    });
+                    recommendations.push({
+                        text: "Review your trading plan with a mentor before next session",
+                        priority: "medium"
+                    });
+                } else if (emotionScore < 60) {
+                    recommendations.push({
+                        text: "Reduce position size by 50% for this session",
+                        priority: "high"
+                    });
+                    recommendations.push({
+                        text: "Set maximum 1% risk per trade until stability improves",
+                        priority: "high"
+                    });
+                    recommendations.push({
+                        text: "Take 10-minute breaks between trades to reset",
+                        priority: "medium"
+                    });
+                    recommendations.push({
+                        text: "Double-check each trade setup with your checklist",
+                        priority: "medium"
+                    });
+                    recommendations.push({
+                        text: "Avoid trading during high-impact news events today",
+                        priority: "low"
+                    });
+                } else {
+                    recommendations.push({
+                        text: "Maintain normal risk parameters - current state is optimal",
+                        priority: "low"
+                    });
+                    recommendations.push({
+                        text: "Continue following your trading plan precisely",
+                        priority: "low"
+                    });
+                    recommendations.push({
+                        text: "Monitor for early signs of frustration or overconfidence",
+                        priority: "medium"
+                    });
+                    recommendations.push({
+                        text: "Take scheduled breaks every 90 minutes to maintain focus",
+                        priority: "low"
+                    });
+                }
+                
+                // Special cases
+                if (mood === 'euphoric' || (mood === 'greedy' && performance.includes('wins'))) {
+                    recommendations.push({
+                        text: "🚨 OVERCONFIDENCE ALERT: Mandatory 48h trading break",
+                        priority: "high"
+                    });
+                }
+                
+                if (mood === 'fearful' && performance.includes('losses')) {
+                    recommendations.push({
+                        text: "Switch to paper trading for minimum 3 days",
+                        priority: "high"
+                    });
+                }
+                
+                if (urge >= 8) {
+                    recommendations.push({
+                        text: "Compulsive trading warning - implement 30-minute delay before each trade",
+                        priority: "high"
+                    });
+                }
+                
+                if (risk >= 8) {
+                    recommendations.push({
+                        text: "Excessive risk-taking detected - reduce position size by 70%",
+                        priority: "high"
+                    });
+                }
+                
+                // Display recommendations
+                const recommendationList = document.getElementById('recommendation-list');
+                recommendationList.innerHTML = '';
+                
+                recommendations.forEach(rec => {
+                    const li = document.createElement('li');
+                    li.className = 'recommendation-item';
+                    li.innerHTML = `
+                        <i class="fas ${rec.priority === 'high' ? 'fa-exclamation-triangle' : 'fa-check-circle'} recommendation-icon"></i>
+                        <div>
+                            <div class="recommendation-text">${rec.text}</div>
+                            <div class="recommendation-priority priority-${rec.priority}">${rec.priority.toUpperCase()} PRIORITY</div>
+                        </div>
+                    `;
+                    recommendationList.appendChild(li);
+                });
+                
+                // Show results
+                document.getElementById('scanner-result').style.display = 'block';
+                
+                // Scroll to results if not fully visible
+                const resultElement = document.getElementById('scanner-result');
+                resultElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            // Event listeners
+            document.getElementById('analyze-btn').addEventListener('click', runAnalysis);
+            document.getElementById('reset-btn').addEventListener('click', resetForm);
+            document.getElementById('new-analysis-btn').addEventListener('click', resetForm);
+            
+            // Form submission handler
+            const form = document.getElementById('scanner-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                runAnalysis();
+            });
+        });
+    </script>
+</body>
+</html>
