@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Light Mode Colors */
             --primary: #0a66ff;
             --primary-dark: #0052d9;
             --primary-light: rgba(10, 102, 255, 0.1);
@@ -40,6 +41,34 @@
             --border-radius-sm: 10px;
             --border: 1px solid rgba(0, 0, 0, 0.05);
             --border-light: 1px solid rgba(0, 0, 0, 0.03);
+            --text-primary: var(--dark);
+            --text-secondary: var(--gray-700);
+            --bg-primary: #f5f9ff;
+            --bg-secondary: var(--lighter);
+        }
+
+        /* Dark Mode Colors */
+        [data-theme="dark"] {
+            --dark: #e2e8f0;
+            --darker: #f1f5f9;
+            --light: #1e293b;
+            --lighter: #0f172a;
+            --gray-100: #1e293b;
+            --gray-200: #334155;
+            --gray-300: #475569;
+            --gray-500: #94a3b8;
+            --gray-700: #e2e8f0;
+            --card-bg: rgba(15, 23, 42, 0.98);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.15);
+            --border: 1px solid rgba(255, 255, 255, 0.05);
+            --border-light: 1px solid rgba(255, 255, 255, 0.03);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
         }
 
         * {
@@ -52,26 +81,28 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #f5f9ff;
-            color: var(--dark);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* App Container */
         .app-container {
             max-width: 1600px;
             margin: 0 auto;
-            background-color: var(--lighter);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.03);
+            background-color: var(--bg-secondary);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background-color 0.3s;
         }
 
         /* Header */
         .app-header {
-            background-color: var(--lighter);
+            background-color: var(--bg-secondary);
             padding: 1.5rem 2.5rem;
             border-bottom: var(--border-light);
             display: flex;
@@ -79,6 +110,7 @@
             align-items: center;
             position: relative;
             z-index: 10;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .logo {
@@ -111,7 +143,69 @@
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .theme-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-300);
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .theme-icon {
+            position: absolute;
+            top: 2px;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .sun {
+            left: 6px;
+        }
+
+        .moon {
+            right: 6px;
         }
 
         /* Main Content */
@@ -131,7 +225,7 @@
         .page-title h1 {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--dark);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             letter-spacing: -0.5px;
         }
@@ -179,7 +273,7 @@
         .card-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -195,6 +289,95 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* Expert Tips Section - Now at the top */
+        .expert-tips-container {
+            margin-bottom: 2.5rem;
+        }
+
+        .expert-tips {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            border: var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .expert-tips h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expert-tips h3 i {
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background-color: var(--gray-100);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            border: var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tip-source {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .tip-meta {
+            flex: 1;
+        }
+
+        .tip-author {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .tip-role {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .tip-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         /* Emotion Scanner */
@@ -213,7 +396,7 @@
         .form-label {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--gray-700);
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -230,7 +413,8 @@
             border-radius: var(--border-radius-sm);
             font-size: 1rem;
             transition: all 0.3s;
-            background-color: var(--lighter);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
             font-weight: 500;
         }
 
@@ -371,7 +555,7 @@
 
         .detail-title {
             font-size: 0.85rem;
-            color: var(--gray-500);
+            color: var(--text-secondary);
             margin-bottom: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -381,7 +565,7 @@
         .detail-value {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--dark);
+            color: var(--text-primary);
             font-feature-settings: "tnum";
             letter-spacing: -1px;
         }
@@ -401,7 +585,7 @@
             margin-bottom: 0.5rem;
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--gray-700);
+            color: var(--text-secondary);
         }
 
         .progress-bar {
@@ -425,7 +609,7 @@
         .recommendations h3 {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -460,7 +644,7 @@
         }
 
         .recommendation-item:hover {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(10, 102, 255, 0.05);
         }
 
         .recommendation-item:last-child {
@@ -477,6 +661,7 @@
         .recommendation-text {
             font-size: 0.95rem;
             line-height: 1.6;
+            color: var(--text-primary);
         }
 
         .recommendation-priority {
@@ -503,87 +688,6 @@
         .priority-low {
             background-color: var(--success-light);
             color: var(--success);
-        }
-
-        /* Expert Tips Section */
-        .expert-tips {
-            margin-top: 3rem;
-        }
-
-        .expert-tips h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .expert-tips h3 i {
-            color: var(--primary);
-            width: 36px;
-            height: 36px;
-            background: var(--primary-light);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .tip-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius-sm);
-            padding: 1.5rem;
-            border: var(--border-light);
-            transition: all 0.3s;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .tip-source {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .tip-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-        }
-
-        .tip-meta {
-            flex: 1;
-        }
-
-        .tip-author {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: var(--dark);
-        }
-
-        .tip-role {
-            font-size: 0.8rem;
-            color: var(--gray-500);
-        }
-
-        .tip-content {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--gray-700);
         }
 
         /* Buttons */
@@ -615,7 +719,7 @@
 
         .btn-secondary {
             background: var(--gray-100);
-            color: var(--gray-700);
+            color: var(--text-primary);
             border: 1px solid var(--gray-200);
         }
 
@@ -670,7 +774,7 @@
 
         .stat-label {
             font-size: 0.85rem;
-            color: var(--gray-500);
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
@@ -702,7 +806,7 @@
 
         .journal-date {
             font-size: 0.8rem;
-            color: var(--gray-500);
+            color: var(--text-secondary);
             margin-bottom: 0.5rem;
         }
 
@@ -735,11 +839,12 @@
             font-weight: 800;
             margin-bottom: 0.5rem;
             letter-spacing: -1px;
+            color: var(--text-primary);
         }
 
         .journal-note {
             font-size: 0.9rem;
-            color: var(--gray-700);
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
@@ -806,6 +911,13 @@
                 <div class="logo-text">NEUROTRADE</div>
             </div>
             <div class="header-actions">
+                <label class="theme-toggle">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider">
+                        <i class="fas fa-sun sun theme-icon"></i>
+                        <i class="fas fa-moon moon theme-icon"></i>
+                    </span>
+                </label>
                 <button class="btn btn-primary" id="new-analysis-btn">
                     <i class="fas fa-plus"></i>
                     <span>New Analysis</span>
@@ -818,6 +930,19 @@
             <div class="dashboard-header">
                 <div class="page-title">
                     <h1>Trading Psychology Dashboard</h1>
+                </div>
+            </div>
+
+            <!-- Expert Tips Section - Now at the top -->
+            <div class="expert-tips-container">
+                <div class="expert-tips">
+                    <h3>
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Daily Expert Trading Tips</span>
+                    </h3>
+                    <div class="tips-grid" id="expert-tips-grid">
+                        <!-- Will be populated by JS -->
+                    </div>
                 </div>
             </div>
 
@@ -978,16 +1103,6 @@
                             <!-- Will be populated by JS -->
                         </ul>
                     </div>
-                    
-                    <div class="expert-tips">
-                        <h3>
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>Expert Trading Psychology Tips</span>
-                        </h3>
-                        <div class="tips-grid" id="expert-tips-grid">
-                            <!-- Will be populated by JS -->
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -1049,6 +1164,28 @@
     <script>
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check for saved theme preference or use system preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.checked = true;
+            }
+            
+            // Listen for toggle changes
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
             // Range slider value display
             const rangeSliders = document.querySelectorAll('.range-slider');
             rangeSliders.forEach(slider => {
